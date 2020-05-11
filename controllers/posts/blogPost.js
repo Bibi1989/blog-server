@@ -115,10 +115,8 @@ module.exports.likePost = async (req, res) => {
 // create comments
 module.exports.createComment = async (req, res) => {
   const user = await req.user;
-  // console.log({ user });
   const { body } = req.body;
   const { commentId } = req.params;
-  // const error = validatePost(data);
   console.log({ body, commentId });
   try {
     if (body === "") {
@@ -128,7 +126,6 @@ module.exports.createComment = async (req, res) => {
     }
 
     const post = await Posts.findById(commentId);
-    // console.log(post);
 
     if (post) {
       post.comments.unshift({
@@ -147,7 +144,6 @@ module.exports.createComment = async (req, res) => {
       res.status(404).json({ status: "error", error: "Post do not exist" });
     }
   } catch (error) {
-    console.log("caught here");
     res.status(404).json({ status: "error", error: error.message });
   }
 };
